@@ -33,7 +33,11 @@ int main(int argc, const char * argv[])
     addr.sin_addr.s_addr = INADDR_ANY;
     addr.sin_len = sizeof(addr);
     
-    bind(sock, (struct sockaddr *)&addr, sizeof(addr));
+   
+    if( (::bind(sock, (struct sockaddr *)&addr, sizeof(addr)))<0){
+        perror("socket");
+        exit(EXIT_FAILURE);
+    }
    
 
     char windowName[] = "camera";
